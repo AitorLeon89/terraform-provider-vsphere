@@ -124,20 +124,6 @@ func schemaVirtualMachineConfigSpec() map[string]*schema.Schema {
 			Optional:    true,
 			Description: "Flag to specify if I/O MMU virtualization, also called Intel Virtualization Technology for Directed I/O (VT-d) and AMD I/O Virtualization (AMD-Vi or IOMMU), is enabled.",
 		},
-		"hv_mode": {
-			Type:         schema.TypeString,
-			Optional:     true,
-			Default:      string(types.VirtualMachineFlagInfoVirtualExecUsageHvAuto),
-			Description:  "The (non-nested) hardware virtualization setting for this virtual machine. Can be one of hvAuto, hvOn, or hvOff.",
-			ValidateFunc: validation.StringInSlice(virtualMachineVirtualExecUsageAllowedValues, false),
-		},
-		"ept_rvi_mode": {
-			Type:         schema.TypeString,
-			Optional:     true,
-			Default:      string(types.VirtualMachineFlagInfoVirtualMmuUsageAutomatic),
-			Description:  "The EPT/RVI (hardware memory virtualization) setting for this virtual machine. Can be one of automatic, on, or off.",
-			ValidateFunc: validation.StringInSlice(virtualMachineVirtualMmuUsageAllowedValues, false),
-		},
 		"enable_logging": {
 			Type:        schema.TypeBool,
 			Optional:    true,
@@ -415,8 +401,6 @@ func flattenVirtualMachineBootOptions(d *schema.ResourceData, obj *types.Virtual
 func expandVirtualMachineFlagInfo(d *schema.ResourceData, client *govmomi.Client) *types.VirtualMachineFlagInfo {
 	obj := &types.VirtualMachineFlagInfo{
 		DiskUuidEnabled:  getBoolWithRestart(d, "enable_disk_uuid"),
-		VirtualExecUsage: getWithRestart(d, "hv_mode").(string),
-		VirtualMmuUsage:  getWithRestart(d, "ept_rvi_mode").(string),
 		EnableLogging:    getBoolWithRestart(d, "enable_logging"),
 	}
 	version := viapi.ParseVersionFromClient(client)
@@ -431,8 +415,6 @@ func expandVirtualMachineFlagInfo(d *schema.ResourceData, client *govmomi.Client
 // VirtualMachineFlagInfo into the passed in ResourceData.
 func flattenVirtualMachineFlagInfo(d *schema.ResourceData, obj *types.VirtualMachineFlagInfo, client *govmomi.Client) error {
 	_ = d.Set("enable_disk_uuid", obj.DiskUuidEnabled)
-	_ = d.Set("hv_mode", obj.VirtualExecUsage)
-	_ = d.Set("ept_rvi_mode", obj.VirtualMmuUsage)
 	_ = d.Set("enable_logging", obj.EnableLogging)
 
 	version := viapi.ParseVersionFromClient(client)

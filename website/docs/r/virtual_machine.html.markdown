@@ -789,11 +789,7 @@ The options are:
 
 * `enable_logging` - (Optional) Enable logging of virtual machine events to a log file stored in the virtual machine directory. Default: `false`.
 
-* `ept_rvi_mode` - (Optional) The EPT/RVI (hardware memory virtualization) setting for the virtual machine. One of `automatic`, `on`, or `off`. Default: `automatic`.
-
 * `force_power_off` - (Optional) If a guest shutdown failed or times out while updating or destroying (see [`shutdown_wait_timeout`](#shutdown_wait_timeout)), force the power-off of the virtual machine. Default: `true`.
-
-* `hv_mode` - (Optional) The hardware virtualization (non-nested) setting for the virtual machine. One of `hvAuto`, `hvOn`, or `hvOff`. Default: `hvAuto`.
 
 * `ide_controller_count` - (Optional) The number of IDE controllers that the virtual machine. This directly affects the number of disks you can add to the virtual machine and the maximum disk unit number. Note that lowering this value does not remove controllers. Default: `2`.
 
@@ -1501,14 +1497,12 @@ The virtual machine will be rebooted if any of the following parameters are chan
 * `disk.write_through`
 * `disk.disk_sharing`
 * `efi_secure_boot_enabled`
-* `ept_rvi_mode`
 * `enable_disk_uuid`
 * `enable_logging`
 * `extra_config`
 * `firmware`
 * `guest_id`
 * `hardware_version`
-* `hv_mode`
 * `memory` -  When reducing the memory size, or when increasing the memory size and `memory_hot_add_enabled` is set to `false`
 * `memory_hot_add_enabled`
 * `nested_hv_enabled`
