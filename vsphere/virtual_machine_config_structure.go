@@ -23,18 +23,6 @@ import (
 
 var virtualMachineResourceAllocationTypeValues = []string{"cpu", "memory"}
 
-var virtualMachineVirtualExecUsageAllowedValues = []string{
-	string(types.VirtualMachineFlagInfoVirtualExecUsageHvAuto),
-	string(types.VirtualMachineFlagInfoVirtualExecUsageHvOn),
-	string(types.VirtualMachineFlagInfoVirtualExecUsageHvOff),
-}
-
-var virtualMachineVirtualMmuUsageAllowedValues = []string{
-	string(types.VirtualMachineFlagInfoVirtualMmuUsageAutomatic),
-	string(types.VirtualMachineFlagInfoVirtualMmuUsageOn),
-	string(types.VirtualMachineFlagInfoVirtualMmuUsageOff),
-}
-
 var virtualMachineSwapPlacementAllowedValues = []string{
 	string(types.VirtualMachineConfigInfoSwapPlacementTypeInherit),
 	string(types.VirtualMachineConfigInfoSwapPlacementTypeVmDirectory),
